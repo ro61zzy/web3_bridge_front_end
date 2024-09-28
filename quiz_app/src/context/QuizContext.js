@@ -13,6 +13,16 @@ const QuizProvider = ({ children }) => {
       options: ['Berlin', 'Madrid', 'Paris', 'Rome'],
       answer: 'Paris',
     },
+    {
+        question: 'What is 2 + 2?',
+        options: ['3', '4', '5', '6'],
+        answer: '4',
+      },
+      {
+        question: 'Who wrote "1984"?',
+        options: ['George Orwell', 'J.K. Rowling', 'Ernest Hemingway', 'Mark Twain'],
+        answer: 'George Orwell',
+      },
    
   ];
 
