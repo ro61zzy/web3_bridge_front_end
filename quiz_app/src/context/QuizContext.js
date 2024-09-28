@@ -63,7 +63,7 @@ const QuizProvider = ({ children }) => {
   
 
   const handleAnswerClick = (selectedOption) => {
-    if (selectedOption === questions[currentQuestionIndex].answer) {
+    if (selectedOption === questions[currentQuestionIndex].correctAnswer) { 
       setScore(score + 1);
     }
     const nextQuestionIndex = currentQuestionIndex + 1;
@@ -73,7 +73,7 @@ const QuizProvider = ({ children }) => {
       setShowResult(true);
     }
   };
-
+  
   return (
     <QuizContext.Provider
       value={{
