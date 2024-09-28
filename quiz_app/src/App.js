@@ -1,9 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Quiz from './components/Quiz';
+import { QuizProvider } from './context/QuizContext'; // Import the QuizProvider
 
 function App() {
   return (
-  <div>Incoming</div>
+    <QuizProvider>
+      <div className="App">
+        <Quiz />
+      </div>
+    </QuizProvider>
   );
 }
 
