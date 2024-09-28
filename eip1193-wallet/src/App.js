@@ -3,15 +3,16 @@ import useWallet from './wallet_script/useWallet';
 import { Container, TextField, Button, Typography } from '@mui/material';
 
 const App = () => {
-  const { account, balance, getBalance } = useWallet();
+  const { account, balance, getBalance, errorMessage } = useWallet(); // Ensure getBalance is included
   const [inputAddress, setInputAddress] = useState('');
 
   const handleAddressChange = (event) => {
     setInputAddress(event.target.value);
   };
 
-  const handleCheckBalance = () => {
-    getBalance(inputAddress);
+  const handleCheckBalance = async () => {
+    console.log("Checking balance for address:", inputAddress); // Debug log
+    await getBalance(inputAddress); // Call getBalance with the input address
   };
 
   return (
@@ -36,6 +37,9 @@ const App = () => {
       </Button>
       {balance !== null && (
         <Typography variant="h6">Balance: {balance} ETH</Typography>
+      )}
+      {errorMessage && (
+        <Typography variant="h6" color="error">{errorMessage}</Typography> // Show error messages if any
       )}
     </Container>
   );

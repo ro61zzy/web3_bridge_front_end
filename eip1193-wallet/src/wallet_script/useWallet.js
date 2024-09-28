@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers"; 
 
-
 const getAccountBalance = async (account) => {
   try {
     const balance = await window.ethereum.request({
@@ -31,7 +30,7 @@ const useWallet = () => {
         const chainId = await window.ethereum.request({ method: "eth_chainId" });
         setNetwork(parseInt(chainId, 16)); 
 
-       
+     
         window.ethereum.on('accountsChanged', async (accounts) => {
           setAccount(accounts[0]);
           const accountBalance = await getAccountBalance(accounts[0]);
@@ -51,6 +50,12 @@ const useWallet = () => {
     }
   };
 
+
+  const getBalance = async (address) => {
+    const accountBalance = await getAccountBalance(address);
+    setBalance(accountBalance);
+  };
+
   useEffect(() => {
     checkWalletConnection();
 
@@ -60,7 +65,8 @@ const useWallet = () => {
     };
   }, []);
 
-  return { account, balance, network, errorMessage };
+  return { account, balance, network, errorMessage, getBalance }; 
+
 };
 
 export default useWallet;
