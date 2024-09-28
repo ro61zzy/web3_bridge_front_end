@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { QuizContext } from '../context/QuizContext';
 import { Box, Button, Typography, List, ListItem } from '@mui/material';
+import CorrectAnswers from './ReviewAnsswers';
 
 const Quiz = () => {
   const {
@@ -10,12 +11,20 @@ const Quiz = () => {
     showResult,
     score,
   } = useContext(QuizContext);
+  const [showCorrectAnswers, setShowCorrectAnswers] = useState(false);
+
+
 
   if (showResult) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" height="100vh">
         <Typography variant="h4">Quiz Completed!</Typography>
         <Typography variant="h5">Your Score: {score} / {questions.length}</Typography>
+        <br />
+        <button onClick={() => setShowCorrectAnswers(!showCorrectAnswers)}>
+          {showCorrectAnswers ? 'Hide Correct Answers' : 'View Correct Answers'}
+        </button>
+        {showCorrectAnswers && <CorrectAnswers />}
       </Box>
     );
   }

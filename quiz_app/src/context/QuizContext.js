@@ -63,7 +63,9 @@ const QuizProvider = ({ children }) => {
   
 
   const handleAnswerClick = (selectedOption) => {
-    if (selectedOption === questions[currentQuestionIndex].correctAnswer) { 
+    if (showResult) return; // Prevent answering after the quiz is done
+  
+    if (selectedOption === questions[currentQuestionIndex].correctAnswer) {
       setScore(score + 1);
     }
     const nextQuestionIndex = currentQuestionIndex + 1;
@@ -73,6 +75,7 @@ const QuizProvider = ({ children }) => {
       setShowResult(true);
     }
   };
+  
   
   return (
     <QuizContext.Provider
