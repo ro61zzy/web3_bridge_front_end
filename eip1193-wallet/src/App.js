@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import useWallet from './wallet_script/useWallet';
+import { Container, TextField, Button, Typography } from '@mui/material';
 
-function App() {
+const App = () => {
+  const { account, balance, getBalance } = useWallet();
+  const [inputAddress, setInputAddress] = useState('');
+
+  const handleAddressChange = (event) => {
+    setInputAddress(event.target.value);
+  };
+
+  const handleCheckBalance = () => {
+    getBalance(inputAddress);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="sm" style={{ marginTop: '2rem' }}>
+      <Typography variant="h4">Wallet Connection</Typography>
+      {account && <Typography variant="h6">Connected Account: {account}</Typography>}
+      <TextField
+        label="Enter Address"
+        variant="outlined"
+        fullWidth
+        value={inputAddress}
+        onChange={handleAddressChange}
+        style={{ margin: '1rem 0' }}
+      />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleCheckBalance}
+        style={{ marginBottom: '1rem' }}
+      >
+        Check Balance
+      </Button>
+      {balance !== null && (
+        <Typography variant="h6">Balance: {balance} ETH</Typography>
+      )}
+    </Container>
   );
-}
+};
 
 export default App;
