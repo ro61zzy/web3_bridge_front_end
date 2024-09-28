@@ -16,12 +16,27 @@ const QuizProvider = ({ children }) => {
    
   ];
 
-
+  const handleAnswerClick = (selectedOption) => {
+    if (selectedOption === questions[currentQuestionIndex].answer) {
+      setScore(score + 1);
+    }
+    const nextQuestionIndex = currentQuestionIndex + 1;
+    if (nextQuestionIndex < questions.length) {
+      setCurrentQuestionIndex(nextQuestionIndex);
+    } else {
+      setShowResult(true);
+    }
+  };
 
   return (
     <QuizContext.Provider
       value={{
-      
+        currentQuestionIndex,
+        score,
+        showResult,
+        questions,
+        handleAnswerClick,
+        setCurrentQuestionIndex,
       }}
     >
       {children}
